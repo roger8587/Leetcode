@@ -39,3 +39,38 @@ class Solution:
                     cloned[neighbor] = cloned_neighbor
                 cloned[current].neighbors.append(cloned[neighbor])
         return cloned[node]
+
+# 2. Add Two Numbers
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        current = 0
+        result = ListNode(0)
+        w = result
+        while l1 or l2 or current > 0:
+            if l1:
+                current += l1.val
+                l1 = l1.next
+            if l2:
+                current += l2.val
+                l2 = l2.next
+            w.next = ListNode(current % 10)
+            current = current // 10
+            w = w.next
+        return result.next
+    
+# 61. Rotate List
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or not head.next: 
+            return head
+        cur = head
+        n = 1
+        while cur.next:
+            cur = cur.next
+            n += 1
+        cur.next = head #形成一個環
+        for i in range(n-k%n):
+            cur = cur.next
+        result = cur.next
+        cur.next = None
+        return result
