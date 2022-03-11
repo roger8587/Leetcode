@@ -74,3 +74,15 @@ class Solution:
         result = cur.next
         cur.next = None
         return result
+
+# 82. Remove Duplicates from Sorted List II
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        if head.next and head.val==head.next.val:
+            while head.next and head.val==head.next.val:
+                head = head.next
+            return self.deleteDuplicates(head.next)
+        head.next = self.deleteDuplicates(head.next)
+        return head
