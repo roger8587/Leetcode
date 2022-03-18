@@ -98,3 +98,16 @@ class Solution:
                 stack.pop()
                 index+=1
         return not(stack)
+
+# 856. Score of Parentheses
+class Solution:
+    def scoreOfParentheses(self, s: str) -> int:
+        score = 0
+        stack = []
+        for i in s:
+            if i == "(":
+                stack.append(score)
+                score = 0
+            else:
+                score = stack.pop(-1)+max(score*2,1)
+        return score
