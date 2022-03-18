@@ -50,3 +50,24 @@ class Solution:
             move = move.next
         move.next = list1 if list1 else list2
         return head.next
+
+# 67. Add Binary
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        num_a, num_b = len(a)-1, len(b)-1
+        current = 0
+        res = []
+        while num_a >= 0 or num_b >= 0:
+            sum = current
+            if num_a >= 0:
+                sum+=int(a[num_a])
+                num_a -= 1
+            if num_b >=0:
+                sum+=int(b[num_b])
+                num_b -= 1
+            current = sum // 2
+            res.append(str(sum % 2))
+        if current>0: res.append(str(current))
+        res.reverse()
+        return ''.join(res)
