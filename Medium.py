@@ -111,3 +111,17 @@ class Solution:
             else:
                 score = stack.pop(-1)+max(score*2,1)
         return score
+# 1081. Smallest Subsequence of Distinct Characters
+# 316. Remove Duplicate Letters
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
+        stack = []
+        s_set = set()
+        last_seen = {j:i for i,j in enumerate(s)}
+        for i,j in enumerate(s):
+            if j not in s_set:
+                while stack and j < stack[-1] and i < last_seen[stack[-1]]:
+                    s_set.remove(stack.pop())
+                stack.append(j)
+                s_set.add(j)
+        return ''.join(stack)
